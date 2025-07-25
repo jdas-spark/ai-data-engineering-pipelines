@@ -4,5 +4,5 @@ apache-airflow-providers-databricks
 apache-airflow-providers-snowflake
 snowflake-connector-python
 pandas
-pyspark
+pyspark==3.4.1
 boto3
