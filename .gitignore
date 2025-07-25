@@ -1,9 +1,24 @@
+# Byte-compiled / cache
 __pycache__/
-*.pyc
-.env
-/tmp/
-.DS_Store
-.idea/
-*.log
-*.bak
+*.py[cod]
+
+# Virtual env
+.env/
+.venv/
+env/
 venv/
+*.egg-info/
+
+# Airflow logs
+logs/
+*.log
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Output files
+*.csv
+*.parquet
+*.gz
