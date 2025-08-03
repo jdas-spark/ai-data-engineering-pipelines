@@ -7,9 +7,13 @@ from datetime import datetime
 
 default_args = {
     'owner': 'airflow',
-    'start_date': datetime(2023, 1, 1),
+    'start_date': datetime(2025, 1, 1),
     'retries': 1
 }
+
+# Get the absolute paths to scripts for clarity and portability
+AIRFLOW_HOME = os.getenv('AIRFLOW_HOME', '/opt/airflow')
+SPARK_JOB_PATH = os.path.join(AIRFLOW_HOME, 'spark_jobs', 'transform_data.py')
 
 with DAG('etl_s3_to_snowflake',
          schedule_interval='@daily',
@@ -27,7 +31,9 @@ with DAG('etl_s3_to_snowflake',
     transform_data = DatabricksRunNowOperator(
         task_id='run_databricks_job',
         databricks_conn_id='databricks_default',
-        job_id=123
+        job_id=123,
+        # Add parameters to Databricks job
+        notebook_params={"python_script_path": SPARK_JOB_PATH}
     )
 
     load_to_snowflake = SnowflakeOperator(
