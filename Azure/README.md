@@ -1,17 +1,17 @@
 # AI-Driven Data Engineering Pipelines
 
-This repository showcases end-to-end batch data pipelines built with Python, Airflow, Spark, Databricks, AWS, and Snowflake.
+This repository showcases end-to-end batch data pipelines built with Python, Airflow, Spark, Databricks, ADLS, and Snowflake.
 
 ## Technologies Used
 - Apache Airflow
 - PySpark on Databricks / AWS Glue
-- AWS S3, EMR
+- Azure ADLS Gen2
 - Snowflake
 - Delta Lake
 - Python
 
 ## Pipeline Example
-**Pipeline**: S3 ➜ Transform with Databricks ➜ Load to Snowflake  
+**Pipeline**: ADLS ➜ Transform with Databricks ➜ Load to Snowflake  
 **Scheduler**: Apache Airflow  
 **Monitoring**: Retry logic, Airflow UI, logging
 
