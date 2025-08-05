@@ -1,12 +1,12 @@
 ## Architecture Flow: Data Pipeline
 
-[CSV in S3]
+[CSV in ADLS]
 ↓
 [Airflow DAG]
 ↓
 [Trigger Databricks Job → PySpark]
 ↓
-[Writes Delta Lake Output to S3]
+[Writes Delta Lake Output to ADLS]
 ↓
 [Airflow: COPY INTO Snowflake]
 ↓

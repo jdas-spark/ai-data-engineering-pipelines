@@ -4,8 +4,9 @@ from pyspark.sql.functions import col, to_date
 # Start Spark Session
 spark = SparkSession.builder.appName("ETL Pipeline").getOrCreate()
 
-# Read input CSV from S3
-df = spark.read.csv("s3a://my-bucket/input/sales.csv", header=True, inferSchema=True)
+# Read input CSV from Azure ADLS Gen2
+df = spark.read.csv("abfss://my-container@my-storage-account.dfs.core.windows.net/input/sales.csv", header=True, inferSchema=True
+)
 
 # Clean and transform data
 cleaned_df = df.withColumn("sales_date", to_date(col("timestamp"))) \
@@ -14,5 +15,5 @@ cleaned_df = df.withColumn("sales_date", to_date(col("timestamp"))) \
 # Aggregate data by region
 agg_df = cleaned_df.groupBy("region").sum("amount")
 
-# Write output to Delta format in S3
-agg_df.write.format("delta").mode("overwrite").save("s3a://my-bucket/output/agg_sales")
+# Write output to Delta format in Azure ADLS Gen2
+agg_df.write.format("delta").mode("overwrite").save("abfss://my-container@my-storage-account.dfs.core.windows.net/output/agg_sales")
