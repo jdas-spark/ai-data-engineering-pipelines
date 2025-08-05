@@ -1,0 +1,4 @@
+transaction_id,user_id,amount,merchant
+T1001,U001,500,Walmart
+T1002,U002,1500,suspicious
+T1003,U003,200,Amazon
