@@ -5,8 +5,7 @@ from pyspark.sql.functions import col, to_date
 spark = SparkSession.builder.appName("ETL Pipeline").getOrCreate()
 
 # Read input CSV from Azure ADLS Gen2
-df = spark.read.csv("abfss://my-container@my-storage-account.dfs.core.windows.net/input/sales.csv", header=True, inferSchema=True
-)
+df = spark.read.csv("abfss://my-container@my-storage-account.dfs.core.windows.net/input/sales.csv", header=True, inferSchema=True)
 
 # Clean and transform data
 cleaned_df = df.withColumn("sales_date", to_date(col("timestamp"))) \
