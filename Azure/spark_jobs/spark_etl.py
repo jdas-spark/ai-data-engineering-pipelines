@@ -16,3 +16,13 @@ agg_df = cleaned_df.groupBy("region").sum("amount")
 
 # Write output to Delta format in Azure ADLS Gen2
 agg_df.write.format("delta").mode("overwrite").save("abfss://my-container@my-storage-account.dfs.core.windows.net/output/agg_sales")
+
+# Select and reorder columns as needed for Snowflake table
+final_df = cleaned_df.select("region", "amount", "sales_date")  # Change columns as needed
+
+# Write the result as CSV to /tmp, to be loaded by the snowflake_load.py script
+final_df.toPandas().to_csv('/tmp/transformed_sales.csv', index=False)
+
+# Optional: Confirm the output file exists
+import os
+print("CSV file created:", os.path.exists('/tmp/transformed_sales.csv'))

@@ -13,7 +13,7 @@ default_args = {
 
 # Get the absolute paths to scripts for clarity and portability
 AIRFLOW_HOME = os.getenv('AIRFLOW_HOME', '/opt/airflow')
-SPARK_JOB_PATH = os.path.join(AIRFLOW_HOME, 'spark_jobs', 'transform_data.py')
+SPARK_JOB_PATH = os.path.join(AIRFLOW_HOME, 'spark_jobs', 'spark_etl.py')
 
 with DAG(
     'etl_adls_to_snowflake',
@@ -41,7 +41,7 @@ with DAG(
         task_id='load_to_snowflake',
         sql="""
 COPY INTO my_table
-FROM @my_stage/my_transformed_data.csv
+FROM @my_stage/transformed_sales.csv
 FILE_FORMAT = (TYPE = 'CSV' FIELD_DELIMITER = ',' SKIP_HEADER = 1);
 """,
         snowflake_conn_id='snowflake_default'
